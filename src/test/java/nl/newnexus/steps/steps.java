@@ -8,6 +8,7 @@ import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
+import nl.newnexus.database.acties.DatabaseActies;
 import nl.newnexus.pages.CreateAccount;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -23,7 +24,8 @@ public class steps {
 
     protected static WebDriver driver;
     private static String browserType = "chrome";
-
+    
+    private DatabaseActies dbActies;
     private String emailadres = "";
 
     @Before
@@ -111,8 +113,7 @@ public class steps {
 
     @Dan("^komen mijn gegevens in de database$")
     public void komenMijnGegevensInDeDatabase() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        Assert.assertTrue(dbActies.accountAanwezig(this.emailadres));
     }
 
     @En("^kan ik inloggen$")

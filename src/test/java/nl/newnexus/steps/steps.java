@@ -1,5 +1,6 @@
 package nl.newnexus.steps;
 
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -14,6 +15,7 @@ import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -152,5 +154,60 @@ public class steps {
         }
         Assert.assertEquals("Kan foutmelding niet vinden", true, blnResult);
         alertOK.accept();
+    }
+
+    List<List<String>> accounts;
+
+    @Gegeven("^deze accounts zijn aangemaakt:$")
+    public void dezeAccountsZijnAangemaakt(DataTable table) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        accounts = table.raw();
+        CreateAccount create = new CreateAccount(driver);
+
+        for (List<String> account : accounts) {
+
+            Random rd = new Random();
+            String emailadres = rd.nextInt(1000000)+ "test@test.nl";
+
+            if (!account.get(0).equalsIgnoreCase("voornaam")) {
+
+                create.vulAccountInformatieIn(account.get(0), account.get(1), account.get(2), emailadres);
+                create.vulPasswordIn(account.get(3), account.get(3));
+                create.clickOpAanmaken();
+
+                WebElement element = this.driver.findElement(By.id("bodyContent"));
+                if (element.getText().toLowerCase().contains("account has been created"))
+                {
+                    WebElement continueButton = this.driver.findElement(By.id("tdb5"));
+                    continueButton.click();
+                }
+
+                WebElement logOff = this.driver.findElement(By.linkText("Log Off"));
+                if (logOff.isDisplayed())
+                    logOff.click();
+
+                WebElement continueButton = this.driver.findElement(By.id("tdb4"));
+                continueButton.click();
+
+                WebElement createAccount = this.driver.findElement(By.linkText("create an account"));
+                if (createAccount.isDisplayed())
+                    createAccount.click();
+
+
+            }
+        }
+
+    }
+
+
+    @En("^de winkelwagen is leeg$")
+    public void deWinkelwagenIsLeeg() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        WebElement shopping = this.driver.findElement(By.linkText("Cart Contents"));
+
+        if (shopping.isDisplayed()) {
+            shopping.click();
+            Assert.assertTrue("Shoppingcart is not empty",this.driver.findElement(By.id("bodyContent")).getText().toLowerCase().contains("shopping cart is empty"));
+        }
     }
 }

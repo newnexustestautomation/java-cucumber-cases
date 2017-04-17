@@ -43,3 +43,16 @@ Functionaliteit: Account aanmaken op de webshop
       |             | tester        | 01/06/1956    | #random |  first name must contain a minimum of 2 characters      |
       | john        |               | 01/06/1956    | #random |  last name must contain a minimum of 2 characters       |
 
+
+
+
+  Scenario: Er moeten meerdere accounts achter elkaar aangemaakt kunnen worden
+
+    Gegeven het scherm ‘account aanmaken’ zichtbaar is
+
+    Gegeven deze accounts zijn aangemaakt:
+      | voornaam | achternaam | geboortedatum | password |
+      | piet     | tester     | 01/01/2000    | test123  |
+      | klaas    | tester     | 01/01/2001    | test123  |
+      | henk     | tester     | 01/01/2000    | test123  |
+    En de winkelwagen is leeg

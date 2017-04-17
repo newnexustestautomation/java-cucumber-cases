@@ -24,7 +24,7 @@ public class steps {
 
     protected static WebDriver driver;
     private static String browserType = "chrome";
-    
+
     private DatabaseActies dbActies;
     private String emailadres = "";
 
@@ -39,6 +39,12 @@ public class steps {
                     .setScriptTimeout(30, TimeUnit.SECONDS);
             driver.manage().deleteAllCookies();
         }
+
+        dbActies = DatabaseActies.getInstance();
+        if(!dbActies.valid) {
+            dbActies.init();
+        }
+
     }
 
     @After

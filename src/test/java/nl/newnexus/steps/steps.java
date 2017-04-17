@@ -135,4 +135,22 @@ public class steps {
         CreateAccount create = new CreateAccount(driver);
         Assert.assertEquals("",true,create.checkFoutmelding(foutmelding));
     }
+
+
+    @En("^controleer foutmelding \"([^\"]*)\" bij leeglaten van veld$")
+    public void controleerFoutmeldingBijLeeglatenVanVeld(String foutmelding) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        Boolean blnResult;
+
+        Alert alertOK = driver.switchTo().alert();
+        String text = alertOK.getText();
+
+        if (text.toLowerCase().contains(foutmelding.toLowerCase())) {
+            blnResult = true;
+        } else {
+            blnResult = false;
+        }
+        Assert.assertEquals("Kan foutmelding niet vinden", true, blnResult);
+        alertOK.accept();
+    }
 }

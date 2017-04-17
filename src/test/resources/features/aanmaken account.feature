@@ -2,7 +2,6 @@
 
 Functionaliteit: Account aanmaken op de webshop
 
-  @REGRESSIETEST
   Scenario: Gebruiker moet een nieuwe account kunnen aanmaken
 
   Gegeven het scherm ‘account aanmaken’ zichtbaar is
@@ -15,7 +14,8 @@ Functionaliteit: Account aanmaken op de webshop
     En kan ik inloggen
 
 
-  @REGRESSIETEST
+
+
   Scenario: Foutmelding moet verschijnen als een eerder gebruikt emailadres wordt gebruikt.
 
     Gegeven het scherm ‘account aanmaken’ zichtbaar is
@@ -24,4 +24,22 @@ Functionaliteit: Account aanmaken op de webshop
     En het password met "test125"
     En als ik op de knop ‘aanmaken' klik
     En controleer foutmelding "e-address allready exists"
+
+
+
+  Abstract Scenario: Er moeten foutmeldingen verschijnen bij het leeglaten van een invoerveld
+
+    Gegeven het scherm ‘account aanmaken’ zichtbaar is
+
+    Als ik een accountgegevens invul voor "<voornaam>" "<achternaam>", "<geboortedatum>" en "<email>" met een standaard adres
+    En het password met "test123"
+    En als ik op de knop ‘aanmaken' klik
+    En controleer foutmelding "<foutmelding>" bij leeglaten van veld
+
+    Voorbeelden:
+      | voornaam    | achternaam    | geboortedatum | email   |  foutmelding                                            |
+      | john        | tester        |               | #random |  date of birth must be in this format                   |
+      | john        | tester        | 01/06/1956    |         |  e-mail address must contain a minimum of 6 characters  |
+      |             | tester        | 01/06/1956    | #random |  first name must contain a minimum of 2 characters      |
+      | john        |               | 01/06/1956    | #random |  last name must contain a minimum of 2 characters       |
 

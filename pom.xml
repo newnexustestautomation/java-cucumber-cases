@@ -66,9 +66,9 @@
                 <version>2.18.1</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <includes>
+                    <excludes>
                         <exclude>**/*IT.java</exclude>
-                    </includes>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

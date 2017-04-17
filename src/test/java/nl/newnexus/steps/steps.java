@@ -125,8 +125,14 @@ public class steps {
     @En("^kan ik inloggen$")
     public void kanIkInloggen() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        //throw new PendingException();
     }
 
 
+    @En("^controleer foutmelding \"([^\"]*)\"$")
+    public void controleerFoutmelding(String foutmelding) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        CreateAccount create = new CreateAccount(driver);
+        Assert.assertEquals("",true,create.checkFoutmelding(foutmelding));
+    }
 }

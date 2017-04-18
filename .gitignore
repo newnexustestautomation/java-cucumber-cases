@@ -1,4 +1,12 @@
 # Created by .ignore support plugin (hsz.mobi)
+<<<<<<< HEAD
 /target
 /.idea
 java-cucumber-cursus.iml
+=======
+.idea/
+target/
+*.iml
+
+
+>>>>>>> 46332b9493ec6a6dd8521673d0868e46e1bc3a93

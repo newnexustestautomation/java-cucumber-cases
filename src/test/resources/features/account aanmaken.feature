@@ -1,7 +1,10 @@
 #language:nl
+Functionaliteit: Account aanmaken p de webshop
 
   Scenario: Maak account aan
-  Gegeven de website oopen staat
-  Als ik op account aanmaken click
-  En ik de accountgegevens invul voor "John" "tester", "08/24/1978" en "#random"
-  Dan wordt de account aangemaakt voor de gebruiker
+    Gegeven het scherm 'account aanmaken' zichtbaar is
+    Als ik de accountgegevens invul voor "John" "tester", "08/24/1978" en "#random"
+    En het passwork met 'test125'
+    En als ik op de knop 'aanmaken' klik
+    Dan komen mijn gegevens in de database
+    En kan ik inloggen

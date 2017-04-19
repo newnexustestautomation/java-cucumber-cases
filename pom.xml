@@ -8,6 +8,7 @@
     <artifactId>java-cucumber-cursus</artifactId>
     <version>1.0-SNAPSHOT</version>
     <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
+    <dependencies>
     <dependency>
         <groupId>info.cukes</groupId>
         <artifactId>cucumber-java</artifactId>
@@ -25,4 +26,5 @@
         <artifactId>cucumber-junit</artifactId>
         <version>1.2.4</version>
     </dependency>
+    </dependencies>
 </project>

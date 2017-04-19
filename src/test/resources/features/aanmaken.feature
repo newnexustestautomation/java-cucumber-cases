@@ -1,7 +1,6 @@
 #language:nl
 
-
-  Fucntionaliteit: Als gebruiker wil ik een account aanmaken
+  Functionaliteit: Als gebruiker wil ik een account aanmaken
 
   Scenario: Account aanmaken
 

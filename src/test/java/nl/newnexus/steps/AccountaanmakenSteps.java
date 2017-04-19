@@ -3,6 +3,7 @@ package nl.newnexus.steps;
 import cucumber.api.PendingException;
 import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
+import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
 
 import java.io.IOException;
@@ -43,5 +44,10 @@ public class AccountaanmakenSteps {
     public void wordErEenNieuweAccountVoorGebruikerAangemaakt() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
 
+    }
+
+    @En("^kan het nieuwe gebruiker inloggen$")
+    public void kanHetNieuweGebruikerInloggen() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
     }
 }

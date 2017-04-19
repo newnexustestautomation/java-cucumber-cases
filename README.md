@@ -1,2 +1,2 @@
 # java-cucumber-cases
-Uitwerkingen van de java-cucumber-cases GJB
+Uitwerkingen van de java-cucumber-cases onzin

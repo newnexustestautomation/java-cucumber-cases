@@ -5,6 +5,7 @@ import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
+import org.junit.Assert;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -37,17 +38,19 @@ public class AccountaanmakenSteps {
     @Als("^gebruiker zijn gegevens invult$")
     public void gebruikerZijnGegevensInvult() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
+        Assert.assertEquals("Deze som klopt niet", 1+1,2);
 
     }
 
     @Dan("^word er een nieuwe account voor gebruiker aangemaakt$")
     public void wordErEenNieuweAccountVoorGebruikerAangemaakt() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-
+        Assert.assertEquals("Deze som klopt niet", 1+1,2);
     }
 
     @En("^kan het nieuwe gebruiker inloggen$")
     public void kanHetNieuweGebruikerInloggen() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
+        Assert.assertEquals("Deze som klopt niet", 1+1,3);
     }
 }

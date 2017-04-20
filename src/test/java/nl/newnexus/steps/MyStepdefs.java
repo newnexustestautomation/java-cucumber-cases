@@ -10,10 +10,7 @@ import cucumber.api.java.nl.Gegeven;
 import nl.newnexus.database.acties.DatabaseActies;
 import nl.newnexus.database.entiteiten.Customers;
 import nl.newnexus.entiteiten.User;
-import nl.newnexus.pages.CatalogPage;
-import nl.newnexus.pages.MyAccountPage;
-import nl.newnexus.pages.NewAccountCreatedPage;
-import nl.newnexus.pages.NewCustomerPage;
+import nl.newnexus.pages.*;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -65,6 +62,8 @@ public class MyStepdefs {
                 }
             } finally {
                 webDriver.quit();
+
+                webDriver = null;
             }
         }
     }
@@ -92,12 +91,22 @@ public class MyStepdefs {
 
         Assert.assertTrue(newAccountCreatedPage.isAccountCreated());
         Assert.assertTrue(accountAanwezigInDatabase(this.user.getEmailAddress()));
+
+        newAccountCreatedPage.logoff();
+
+        final LogoffPage logoffPage = new LogoffPage(webDriver);
+
+        logoffPage.continueAfterLogoff();
     }
 
     @Gegeven("^dat ik geen account heb$")
     public void datIkGeenAccountHeb() throws Throwable {
-        webDriver.get("http://test-pc/catalog/");
-        webDriver.manage().window().maximize();
+        final String currentUrl = webDriver.getCurrentUrl();
+
+        if (!"http://test-pc/catalog/index.php".equals(currentUrl)) {
+            webDriver.get("http://test-pc/catalog/");
+            webDriver.manage().window().maximize();
+        }
 
         final CatalogPage catalogPage = new CatalogPage(webDriver);
 

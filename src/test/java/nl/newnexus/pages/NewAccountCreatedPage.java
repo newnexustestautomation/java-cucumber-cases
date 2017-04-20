@@ -15,6 +15,9 @@ public class NewAccountCreatedPage extends AbstractPageObject {
     @FindBy(id = "bodyContent")
     private WebElement elementBodyContent;
 
+    @FindBy(id = "tdb4")
+    private WebElement elementLogoff;
+
     public NewAccountCreatedPage(final WebDriver webDriver) {
         super(webDriver);
     }
@@ -35,5 +38,9 @@ public class NewAccountCreatedPage extends AbstractPageObject {
         final WebElement elementText = getTextElement();
 
         return "Your Account Has Been Created!".equals(elementText.getText());
+    }
+
+    public void logoff() {
+        this.elementLogoff.click();
     }
 }

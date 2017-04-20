@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -12,65 +13,143 @@ import java.util.List;
  */
 public class CreateAccount extends PageObject {
 
-    WebDriver driver;
+    @FindBy(className = "messageStackError")
+    private WebElement foutmelding;
+
+    @FindBy(id="bodyContent")
+    private WebElement content;
 
     @FindBy(name="gender")
     private List<WebElement> gender;
 
-    @FindBy(id="firstename")
+    @FindBy(name="firstname")
     private WebElement firstName;
 
-    @FindBy(id="lastename")
+    @FindBy(name="lastname")
     private WebElement lastName;
 
     @FindBy(name="dob")
     private WebElement date;
 
-    @FindBy(id="email_adress")
+    @FindBy(name="email_address")
     private WebElement email;
 
-    @FindBy(id="address")
-    private WebElement address;
+    @FindBy(name="street_address")
+    private WebElement streetadress;
 
-    @FindBy(id="zipcode")
-    private WebElement zipcodename;
+    @FindBy(name="postcode")
+    private WebElement postcode;
 
-    @FindBy(id="signup")
-    private WebElement signup;
+    @FindBy(name="country")
+    private WebElement country;
+
+    @FindBy(name="state")
+    private WebElement state;
+
+    @FindBy(name="city")
+    private WebElement city;
+
+    @FindBy(name="suburb")
+    private WebElement suburb;
+
+    @FindBy(name="telephone")
+    private WebElement telephone;
+
+    @FindBy(name="password")
+    private WebElement password;
+
+    @FindBy(name="confirmation")
+    private WebElement confirmation;
 
     @FindBy(id="tdb4")
     private WebElement continuebutton;
-
-    @FindBy(id="tdb5")
-    private WebElement myaccountbutton;
 
     public CreateAccount(WebDriver driver) {
         super(driver);
     }
 
-    public void enterName(){
-        this.firstName.sendKeys("Carl");
-        this.lastName.sendKeys("ter Beek");
-        this.date.sendKeys("29-12-1981");
-        this.email.sendKeys("carlterbeek@home.nl");
+    public Boolean wordtPaginaGetoond() {
+
+        String text = content.getText().toLowerCase();
+
+        if (text.contains("account information"))
+            return true;
+        else
+            return false;
 
     }
 
-//    public void enterAdress(){
-//        this.firstName.clear();
-//        this.lastName.clear();
-//        this.date.clear();
-//        this.email.clear();
+    public Boolean vulAccountInformatieIn(String fn, String ln, String dob, String em)
+    {
+        for (WebElement e : gender) {
+            if (e.getAttribute("value").equalsIgnoreCase("m"))
+                e.click();
+        }
+
+        //country.sendKeys("Netherlands");
+        Select countryDropdown = new Select(country);
+        countryDropdown.selectByVisibleText("Netherlands");
+
+        firstName.sendKeys(fn);
+        lastName.sendKeys(ln);
+        date.sendKeys(dob);
+        email.sendKeys(em);
+        telephone.sendKeys("06147067060");
+        streetadress.sendKeys("teststraat");
+        suburb.sendKeys("test");
+        city.sendKeys("Groningen");
+        state.sendKeys("Groningen");
+        postcode.sendKeys("9736CD");
+        return true;
+    }
+
+
+//    public void enterName(){
+//        this.gender.ge
 //        this.firstName.sendKeys("Carl");
 //        this.lastName.sendKeys("ter Beek");
-//        this.lastName.sendKeys("29-12-1981");
-//        this.lastName.sendKeys("carlterbeek@home.nl");
-
+//        this.date.sendKeys("29-12-1981");
+//        this.email.sendKeys("carlterbeek@home.nl");
 //
-//    public ReceiptPage submit(){
-//        submitButton.click();
-//        return new ReceiptPage(driver);
 //    }
+//
+//    public void enterAddress() {
+//        this.streetadress.sendKeys("Jensemaheerd");
+//        this.postcode.sendKeys("9736CD");
+//        this.city.sendKeys("Groningen");
+//        this.state.sendKeys("Groningen");
+//        this.country.sendKeys("Nederland");
+//        this.state.sendKeys("Groningen");
+//        this.telefoonummer.sendKeys("Nederland");
+//        this.country.sendKeys("Nederland");
+
+
+    public Boolean vulPasswordIn(String pw, String cf)
+    {
+        password.sendKeys(pw);
+        confirmation.sendKeys(cf);
+        return true;
+    }
+
+    public Boolean clickOpAanmaken()
+    {
+        continuebutton.click();
+        return true;
+    }
+
+    public Boolean checkFoutmelding(String melding) {
+
+        String item = foutmelding.getAttribute("innerHTML").toLowerCase();
+
+        if (item.contains(melding.toLowerCase())) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+
 
 
     }

@@ -45,4 +45,8 @@ import java.util.concurrent.TimeUnit;
 
         }
 
+  public WebDriver getDriver(){
+            return driver;
+  }
+
     }

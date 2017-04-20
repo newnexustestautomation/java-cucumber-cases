@@ -118,8 +118,15 @@ public class steps {
     @En("^kan ik inloggen$")
     public void kanIkInloggen() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        CreateAccount createAccount = new CreateAccount(driver);
+        //Assert.assertEquals(createAccount.checkFoutmelding("aaaa"));
     }
 
 
+    @Dan("^wordt mijn account aangemaakt$")
+    public void wordtMijnAccountAangemaakt() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        CreateAccount createAccount = new CreateAccount(driver);
+        Assert.assertTrue(createAccount.isAccountAangemaakt("your account has been created"));
+    }
 }

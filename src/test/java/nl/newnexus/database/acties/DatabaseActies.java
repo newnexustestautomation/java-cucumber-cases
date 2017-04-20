@@ -18,31 +18,36 @@ public class DatabaseActies {
     public boolean valid = false;
     private EntityManager em = null;
 
-    public boolean Init() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("zelf verwijzen naar persistence unit");
+    public boolean init() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
         em = emf.createEntityManager();
         em.getTransaction().begin();
         valid = true;
         return true;
     }
 
-    public boolean accountAanwezig(String email){
-        Query query = em.createQuery("<zelf query schrijven>");
-        if((Integer) query.getResultList().size()>=1) {
-            System.out.print("\nMomenteel zijn er " + (Integer) query.getResultList().size() + "accounts met emailadres" + email + "in de database");
+
+    public static DatabaseActies getOurInstance() {
+        if (ourInstance == null)
+            ourInstance = new DatabaseActies();
+        return ourInstance;
+
+    }
+
+    public boolean accountAanwezig(String email) {
+        Query query = em.createQuery("select c from Customers c where c.customersEmailAddress = '" + email + "'");
+        if ((Integer) query.getResultList().size() >= 1) {
+            System.out.println("\nMomenteel zijn er " + (Integer) query.getResultList().size() + " accounts met emailadres " + email + " in de database!");
+
             return true;
         }
         return false;
-        }
-
-
-    public static DatabaseActies getOurInstance(){
-        if
-
-        
     }
 
 
+}
 
-    }
+
+
+
 

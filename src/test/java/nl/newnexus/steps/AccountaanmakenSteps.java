@@ -8,6 +8,7 @@ import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
+import nl.newnexus.database.acties.DatabaseActies;
 import nl.newnexus.pages.CreateAccount;
 import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
@@ -28,6 +29,21 @@ public class AccountaanmakenSteps {
     WebDriver driver;
     CreateAccount createAccount;
 
+    private String emailadress;
+    private DatabaseActies dbActies;
+
+    @Before
+    public void Start(){
+
+        dbActies = DatabaseActies.getOurInstance();
+
+        if(!dbActies.valid){
+            dbActies.init();
+        }
+
+    }
+
+
     @Gegeven("^Gebruiker navigeert naar website$")
     public void gebruikerNavigeertNaarWebsite() throws Throwable {
         //driver.get("http://test-pc/catalog/create_account.php");
@@ -42,10 +58,10 @@ public class AccountaanmakenSteps {
         String fn= "Carl";
         String ln= "ter Beek";
         String dob = "12/29/1981";
-        String em = "test@test.nl";
+        String em = "test2@test.nl";
         String pw = "testcarl";
         String cf = "testcarl";
-
+        this.emailadress=em;
         createAccount.vulAccountInformatieIn(fn,ln,dob,em);
         createAccount.vulPasswordIn(pw,cf);
         createAccount.clickOpAanmaken();
@@ -55,7 +71,8 @@ public class AccountaanmakenSteps {
     @Dan("^word er een nieuwe account voor gebruiker aangemaakt$")
     public void wordErEenNieuweAccountVoorGebruikerAangemaakt() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        Assert.assertEquals("Deze som klopt niet", 1+1,2);
+
+        Assert.assertTrue(dbActies.accountAanwezig(this.emailadress));
     }
 
     @En("^kan het nieuwe gebruiker inloggen$")

@@ -1,7 +1,8 @@
 #language:nl
 
-  Functionaliteit: Als gebruiker wil ik een account aanmaken
 
+  Functionaliteit: Als gebruiker wil ik een account aanmaken
+    @REGRESSIETEST
   Scenario: Account aanmaken
 
   Gegeven Gebruiker navigeert naar website

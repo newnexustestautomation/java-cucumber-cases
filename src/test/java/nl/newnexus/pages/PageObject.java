@@ -1,6 +1,8 @@
 package nl.newnexus.pages;
 
 import cucumber.api.Scenario;
+import nl.newnexus.database.acties.DatabaseActies;
+import org.junit.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +29,7 @@ public class PageObject {
             PageFactory.initElements(this.driver, this);
         }
     }
+
     public void Stop(Scenario scenario) {
 
         if (driver != null) {
@@ -40,6 +43,8 @@ public class PageObject {
                 driver.quit();
             }
         }
+        driver = null;
 
     }
 }
+

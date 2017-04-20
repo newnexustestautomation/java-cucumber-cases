@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Tester on 4/19/2017.
  */
-public class MyStepdefs {
+public class AccountAanmakenStepdefs {
     private static WebDriver webDriver;
 
     private static String browserType = "chrome";

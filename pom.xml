@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nl.newnexus</groupId>
+<<<<<<< HEAD
     <artifactId>java-cucumber-cursus</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
@@ -37,4 +38,38 @@
 
 
 
+=======
+    <artifactId>java-cucumber-cases</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <cucumber.version>1.2.4</cucumber.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.53.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>2.53.0</version>
+        </dependency>
+    </dependencies>
+
+>>>>>>> 1eac32416e0fb20f89afac1bbd94fa7f6dc084aa
 </project>

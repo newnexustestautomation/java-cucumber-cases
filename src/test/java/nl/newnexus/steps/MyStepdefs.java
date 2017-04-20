@@ -7,7 +7,7 @@ import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
-import nl.newnexus.entity.User;
+import nl.newnexus.entiteiten.User;
 import nl.newnexus.pages.CatalogPage;
 import nl.newnexus.pages.MyAccountPage;
 import nl.newnexus.pages.NewAccountCreatedPage;

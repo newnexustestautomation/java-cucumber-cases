@@ -1,4 +1,4 @@
-package nl.newnexus.entity;
+package nl.newnexus.entiteiten;
 
 /**
  * Created by Tester on 4/20/2017.

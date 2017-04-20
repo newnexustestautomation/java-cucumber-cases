@@ -1,6 +1,5 @@
 package nl.newnexus.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -8,6 +7,7 @@ import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
+import nl.newnexus.entity.User;
 import nl.newnexus.pages.CatalogPage;
 import nl.newnexus.pages.MyAccountPage;
 import nl.newnexus.pages.NewAccountCreatedPage;
@@ -15,9 +15,7 @@ import nl.newnexus.pages.NewCustomerPage;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -97,11 +95,18 @@ public class MyStepdefs {
         Assert.assertTrue(newCustomerPage.isInitialized());
     }
 
-    @Als("^ik een accountgegevens invul voor \"([^\"]*)\" \"([^\"]*)\", \"([^\"]*)\" en \"([^\"]*)\" met een standaard adres$")
-    public void ikEenAccountgegevensInvulVoorEnMetEenStandaardAdres(String arg0, String arg1, String arg2, String
-            arg3) throws Throwable {
+    @Als("^ik een accountgegevens invul voor \"([^\"]*)\" \"([^\"]*)\", \"([^\"]*)\" met een standaard adres$")
+    public void ikEenAccountgegevensInvulVoorEnMetEenStandaardAdres(final String nameFirst,
+                                                                    final String nameLast,
+                                                                    final String dateOfBirth) throws Throwable {
+        final User user = new User();
+
+        user.setDateOfBirth(dateOfBirth);
+        user.setNameFirst(nameFirst);
+        user.setNameLast(nameLast);
+
         final NewCustomerPage newCustomerPage = new NewCustomerPage(webDriver);
 
-        newCustomerPage.fillNewCustomer();
+        newCustomerPage.fillNewCustomer(user);
     }
 }

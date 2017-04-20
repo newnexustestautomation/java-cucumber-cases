@@ -1,10 +1,9 @@
 package nl.newnexus.pages;
 
-import org.openqa.selenium.By;
+import nl.newnexus.entity.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.Random;
 
@@ -71,10 +70,7 @@ public class NewCustomerPage extends AbstractPageObject {
 
     private static final String PW = String.valueOf(new Random().nextInt()) + "";
 
-    public void fillNewCustomer() {
-        final String nameFirst = "John";
-        final String nameLast = "Doe";
-        final String dateOfBirth = "08/24/1978";
+    public void fillNewCustomer(final User user) {
         final String emailAddress = getRandomName().concat("@doe.nl");
         final String addressStreet = "De Cockstraat 41";
         final String postcode = "9746BV";
@@ -85,9 +81,9 @@ public class NewCustomerPage extends AbstractPageObject {
         final String password = "test1";
 
         elementGender.click();
-        elementNameFirst.sendKeys(nameFirst);
-        elementNameLast.sendKeys(nameLast);
-        elementDateOfBirth.sendKeys(dateOfBirth);
+        elementNameFirst.sendKeys(user.getNameFirst());
+        elementNameLast.sendKeys(user.getNameLast());
+        elementDateOfBirth.sendKeys(user.getDateOfBirth());
         elementEmailAddress.sendKeys(emailAddress);
         elementAddressStreet.sendKeys(addressStreet);
         elementPostcode.sendKeys(postcode);

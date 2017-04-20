@@ -101,12 +101,8 @@ public class MyStepdefs {
 
     @Gegeven("^dat ik geen account heb$")
     public void datIkGeenAccountHeb() throws Throwable {
-        final String currentUrl = webDriver.getCurrentUrl();
-
-        if (!"http://test-pc/catalog/index.php".equals(currentUrl)) {
-            webDriver.get("http://test-pc/catalog/");
-            webDriver.manage().window().maximize();
-        }
+        webDriver.get("http://test-pc/catalog/");
+        webDriver.manage().window().maximize();
 
         final CatalogPage catalogPage = new CatalogPage(webDriver);
 

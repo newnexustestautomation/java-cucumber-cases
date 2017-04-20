@@ -62,16 +62,7 @@ public class NewCustomerPage extends AbstractPageObject {
         return this.elementGender.isDisplayed();
     }
 
-    private String getRandomName() {
-        final int number = (int)(Math.random() * 10000.0);
-
-        return String.valueOf(number);
-    }
-
-    private static final String PW = String.valueOf(new Random().nextInt()) + "";
-
     public void fillNewCustomer(final User user) {
-        final String emailAddress = getRandomName().concat("@doe.nl");
         final String addressStreet = "De Cockstraat 41";
         final String postcode = "9746BV";
         final String city = "Groningen";
@@ -84,7 +75,7 @@ public class NewCustomerPage extends AbstractPageObject {
         elementNameFirst.sendKeys(user.getNameFirst());
         elementNameLast.sendKeys(user.getNameLast());
         elementDateOfBirth.sendKeys(user.getDateOfBirth());
-        elementEmailAddress.sendKeys(emailAddress);
+        elementEmailAddress.sendKeys(user.getEmailAddress());
         elementAddressStreet.sendKeys(addressStreet);
         elementPostcode.sendKeys(postcode);
         elementCity.sendKeys(city);

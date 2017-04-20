@@ -7,6 +7,7 @@ public class User {
     private String nameFirst;
     private String nameLast;
     private String dateOfBirth;
+    private String emailAddress;
 
     public String getNameFirst() {
         return nameFirst;
@@ -30,5 +31,13 @@ public class User {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getEmailAddress() {
+        return this.emailAddress;
+    }
+
+    public void setEmailAddress(final String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 }

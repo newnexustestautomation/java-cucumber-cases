@@ -7,6 +7,8 @@ import cucumber.api.java.nl.Als;
 import cucumber.api.java.nl.Dan;
 import cucumber.api.java.nl.En;
 import cucumber.api.java.nl.Gegeven;
+import nl.newnexus.database.acties.DatabaseActies;
+import nl.newnexus.database.entiteiten.Customers;
 import nl.newnexus.entiteiten.User;
 import nl.newnexus.pages.CatalogPage;
 import nl.newnexus.pages.MyAccountPage;
@@ -16,6 +18,13 @@ import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,8 +35,14 @@ public class MyStepdefs {
 
     private static String browserType = "chrome";
 
+    private DatabaseActies databaseActies;
+
+    private User user;
+
     @Before
     public void before() {
+        this.databaseActies = DatabaseActies.getDatabaseActiesInstance();
+
         if (webDriver == null) {
             System.setProperty("webdriver.chrome.driver", "drivers//chromedriver.exe");
 
@@ -54,11 +69,29 @@ public class MyStepdefs {
         }
     }
 
+    private boolean accountAanwezigInDatabase(final String emailAddress) {
+        final EntityManager entityManager = this.databaseActies.getEntityManager();
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<Customers> criteriaQuery = criteriaBuilder.createQuery(Customers.class);
+        final Root<Customers> root = criteriaQuery.from(Customers.class);
+        final Predicate predicateEmailAddress =
+                criteriaBuilder.equal(root.get("customersEmailAddress"), emailAddress);
+
+        criteriaQuery.where(predicateEmailAddress);
+        criteriaQuery.select(root);
+
+        final TypedQuery<Customers> typedQuery = entityManager.createQuery(criteriaQuery);
+        final List<Customers> resultList = typedQuery.getResultList();
+
+        return !resultList.isEmpty();
+    }
+
     @Dan("^word een accountgegevens aangemaakt$")
     public void wordEenAccountgegevensAangemaakt() throws Throwable {
         final NewAccountCreatedPage newAccountCreatedPage = new NewAccountCreatedPage(webDriver);
 
         Assert.assertTrue(newAccountCreatedPage.isAccountCreated());
+        Assert.assertTrue(accountAanwezigInDatabase(this.user.getEmailAddress()));
     }
 
     @Gegeven("^dat ik geen account heb$")
@@ -95,15 +128,26 @@ public class MyStepdefs {
         Assert.assertTrue(newCustomerPage.isInitialized());
     }
 
+    private String getRandomName() {
+        final int number = (int)(Math.random() * 10000.0);
+
+        return String.valueOf(number);
+    }
+
+    private String generateEmailAddress() {
+        return getRandomName().concat("@doe.nl");
+    }
+
     @Als("^ik een accountgegevens invul voor \"([^\"]*)\" \"([^\"]*)\", \"([^\"]*)\" met een standaard adres$")
     public void ikEenAccountgegevensInvulVoorEnMetEenStandaardAdres(final String nameFirst,
                                                                     final String nameLast,
                                                                     final String dateOfBirth) throws Throwable {
-        final User user = new User();
+        user = new User();
 
         user.setDateOfBirth(dateOfBirth);
         user.setNameFirst(nameFirst);
         user.setNameLast(nameLast);
+        user.setEmailAddress(generateEmailAddress());
 
         final NewCustomerPage newCustomerPage = new NewCustomerPage(webDriver);
 

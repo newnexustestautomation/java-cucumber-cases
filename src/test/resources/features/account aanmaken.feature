@@ -1,4 +1,5 @@
 #language:nl
+@REGRESSIETEST
 Functionaliteit: Account aanmaken
 Abstract Scenario: Account aanmaken
   Gegeven dat ik geen account heb

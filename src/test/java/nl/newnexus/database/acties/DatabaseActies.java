@@ -33,9 +33,9 @@ public class DatabaseActies {
             System.out.println("Geen databaseconnectie gemaakt (aanroepen init!)");
             return false;
         }
-        Query query = em.createQuery("select count(c) from Customers c where c.customersEmailAddress = '"+ email+"'" );
-        if((Integer)  query.getResultList().size()>=1) {
-            System.out.println("\nMomenteel zijn er "+(Integer)  query.getResultList().size()+" accounts met emailadres "+email+ " in de database!");
+        Query query = em.createQuery("select c from Customers c where c.customersEmailAddress = '"+ email+"'" );
+        if(query.getResultList().size()>=1) {
+            System.out.println("\nMomenteel zijn er "+query.getResultList().size()+" accounts met emailadres "+email+ " in de database!");
             return true;
         }
             return false;
